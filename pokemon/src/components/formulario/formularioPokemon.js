@@ -17,6 +17,10 @@ import './formularioPokemon.scss'
 
 import { GrAdd } from "react-icons/gr";
 
+import ReactSlider from 'react-slider'
+
+
+
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
@@ -165,18 +169,7 @@ export default class FormularioPokemon extends React.Component {
                             Defensa
                             </Col>
                             <Col>
-                            <toolcool-range-slider
-                                slider-width="400px"
-                                slider-height="0.5rem"
-                                pointer-width="1.5rem"
-                                pointer-height="1.5rem"
-                                pointer-bg="#6AD3BA"
-                                pointer-bg-hover="#50BDA3"
-                                pointer-shadow="none"
-                                pointer-shadow-hover="none"
-                                pointer-border="0"
-                                pointer-border-hover="1px solid #3F8A8A"
-                                pointer-border-focus="1px solid #3F8A8A"></toolcool-range-slider>
+                            <ReactSlider  />
                             </Col>
                         
                         </Row>

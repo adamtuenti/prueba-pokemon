@@ -42,3 +42,27 @@ export const savePokemon = async (jsonForm) => {
 
     return json
 }
+
+export const detelePokemon = async (id) => {
+    console.log(id)
+    let json;
+    const requestOptions = {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        //body: JSON.stringify(jsonForm)
+    };
+
+
+    await fetch(process.env.REACT_APP_BASEPATH+':'+id.toString(), requestOptions)
+        .then((response) => { return response.json() })
+        .then((data) => {
+            console.log('bien: ', data)
+            json = data
+        })
+        .catch((err) => {
+            console.log('error: ', err)
+            return err
+        })
+
+    return json
+}

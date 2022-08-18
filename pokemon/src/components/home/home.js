@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { getPokemons } from "../../services/api";
+import { getPokemons, detelePokemon } from "../../services/api";
 
 import TABLE_BODY from "./data.json";
 
@@ -26,6 +26,8 @@ import {
 import { Col, Row, Table } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+import DataTable from "react-data-table-component";
 
 
 export default class Home extends React.Component {
@@ -76,8 +78,18 @@ export default class Home extends React.Component {
         isSortable: true
       },
       {
-        prop: "type",
+        prop: "",
         title: "Acciones",
+        button: true,
+        cell: (row) => {
+          return (
+            <div>
+            <button onClick={()=> detelePokemon(row.id)}>Borrar</button>
+            <button>Editar</button>
+            </div>
+          );
+        }
+      
 
         //isSortable: true
       }
@@ -88,6 +100,8 @@ export default class Home extends React.Component {
       <Container id='containerGeneral'>
 
         <p style = {{fontSize: '25px', marginBottom: '25px'}}>Listado de Pokemones</p>
+
+        
 
         <DatatableWrapper
           body={this.state.pokemones}
