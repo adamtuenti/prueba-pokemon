@@ -53,7 +53,7 @@ export const detelePokemon = async (id) => {
     };
 
 
-    await fetch(process.env.REACT_APP_BASEPATH+':'+id.toString(), requestOptions)
+    await fetch(process.env.REACT_APP_BASEPATH+':'+id.toString() + 'skldjd', requestOptions)
         .then((response) => { return response.json() })
         .then((data) => {
             console.log('bien: ', data)
