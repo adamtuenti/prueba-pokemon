@@ -20,7 +20,6 @@ export const getPokemons = async () => {
 }
 
 export const savePokemon = async (jsonForm) => {
-    console.log(jsonForm)
     let json;
     const requestOptions = {
         method: 'POST',
@@ -32,11 +31,9 @@ export const savePokemon = async (jsonForm) => {
     await fetch(process.env.REACT_APP_BASEPATH+'?idAuthor=1', requestOptions)
         .then((response) => { return response.json() })
         .then((data) => {
-            console.log('bien: ', data)
             json = data
         })
         .catch((err) => {
-            console.log('error: ', err)
             return err
         })
 
@@ -44,7 +41,6 @@ export const savePokemon = async (jsonForm) => {
 }
 
 export const detelePokemon = async (id) => {
-    console.log(id)
     let json;
     const requestOptions = {
         method: 'DELETE',
@@ -56,11 +52,9 @@ export const detelePokemon = async (id) => {
     await fetch(process.env.REACT_APP_BASEPATH+id.toString(), requestOptions)
         .then((response) => { return response.json() })
         .then((data) => {
-            console.log('bien: ', data)
             json = data
         })
         .catch((err) => {
-            console.log('error: ', err)
             return err
         })
 
@@ -68,7 +62,6 @@ export const detelePokemon = async (id) => {
 }
 
 export const getPokemonById = async(id) => {
-    console.log('id: ', id)
     let json;
     const requestOptions = {
         method: 'GET',
@@ -80,11 +73,9 @@ export const getPokemonById = async(id) => {
     await fetch(process.env.REACT_APP_BASEPATH+id, requestOptions)
         .then((response) => { return response.json() })
         .then((data) => {
-            console.log('bien: ', data)
             json = data
         })
         .catch((err) => {
-            console.log('error: ', err)
             return err
         })
 
@@ -93,7 +84,6 @@ export const getPokemonById = async(id) => {
 }
 
 export const updatePokemon = async(jsonForm) => {
-    console.log('id: ', jsonForm)
     let json;
     const requestOptions = {
         method: 'PUT',
@@ -104,12 +94,10 @@ export const updatePokemon = async(jsonForm) => {
 
     await fetch(process.env.REACT_APP_BASEPATH+jsonForm.id, requestOptions)
         .then((response) => { return response.json() })
-        .then((data) => {
-            console.log('bien: ', data)
+        .then(() => {
             return true
         })
-        .catch((err) => {
-            console.log('error: ', err)
+        .catch(() => {
             return false
         })
 

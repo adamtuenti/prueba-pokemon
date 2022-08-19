@@ -6,7 +6,6 @@ import { MdDeleteOutline, MdBorderColor, MdOutlineAdd, MdSearch } from 'react-ic
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
 import './home.scss'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -20,7 +19,6 @@ export default class Home extends React.Component {
       labelFilter: '',
       accion: '',
       idPokemon: '',
-
       page: 1,
       slice: [],
       rows: 5
@@ -60,8 +58,6 @@ export default class Home extends React.Component {
         this.setState({
           pokemones: this.state.pokemones.filter((obj, idx) => idx !== index)
         });
-
-
         
         detelePokemon(pokemon.id).then( () => {
           Swal.fire({
@@ -88,11 +84,9 @@ export default class Home extends React.Component {
     );
   }
 
-
   calculateRange = (data, rowsPerPage) => {
     const range = [];
     const num = Math.ceil(data.length / rowsPerPage);
-    let i = 1;
     for (let i = 1; i <= num; i++) {
       range.push(i);
     }
@@ -103,13 +97,13 @@ export default class Home extends React.Component {
     return data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
   };
 
+  closeForm = (flag) => {
+    this.setState({ crearPokemon: flag })
+  }
 
   render() {
-    
-
     let pokemones =this.state.pokemones
     let page = this.state.page
-
     let range = this.calculateRange(pokemones, this.state.rows)
     let slice = this.sliceData(pokemones, page, this.state.rows)
 
@@ -119,12 +113,6 @@ export default class Home extends React.Component {
       );
     }
 
-
-    
-
-
-
-   
 
     return (
       <Container id='containerGeneral'>
@@ -147,37 +135,16 @@ export default class Home extends React.Component {
                       this.setState({ labelFilter: e.target.value })
                     }
                   />
-
-
-          
-
             </div>
-
-
-
-            
-
-            
 
           </Col>
 
           <Col xs={12} sm={6} lg={6} className="d-flex flex-col justify-content-end align-items-end">
-              
-
               <button className="boton" onClick={() => { this.openForm('new', '') }}>
                 <MdOutlineAdd size = '25' color='white' /> Nuevo
-
-
-
-
               </button>
           </Col>
-
-        </Row>
-
-        
-
-                  
+        </Row> 
 
         <Table striped bordered hover responsive>
       <thead>
@@ -191,7 +158,7 @@ export default class Home extends React.Component {
       </thead>
       <tbody>
         {slice.map((elemento, index) => (
-          <tr>
+          <tr key = {index}>
           <td>{elemento.name}</td>
           <td><img className = 'img-fluid' alt = {elemento.id} style = {{width: '45px', heigth: '45px'}} src = {elemento.image}/></td>
           <td>{elemento.attack}</td>
@@ -205,7 +172,6 @@ export default class Home extends React.Component {
 
           </tr>
         ))}
-       
       </tbody>
     </Table>
 
@@ -222,25 +188,9 @@ export default class Home extends React.Component {
         </button>
       ))}
     </div>
-
-        
-
-        
-
-
-
         {this.state.crearPokemon === true && <div style={{ marginTop: "62.5px", marginBottom: 'auto' }} align="center">
-
-          <FormularioPokemon accionPokemon = {this.state.accion} idPokemon = {this.state.idPokemon}/>
-
-
-
-
-
-
-
+          <FormularioPokemon closeForm = {this.closeForm} accionPokemon = {this.state.accion} idPokemon = {this.state.idPokemon}/>
         </div>
-
         }
       </Container>
     );
