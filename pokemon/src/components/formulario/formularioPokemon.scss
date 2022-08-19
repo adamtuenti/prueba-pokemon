@@ -1,23 +1,25 @@
-.boton{
+.boton {
     background-color: #847cdc;
     padding-left: 2.5%;
     padding-right: 2.5%;
     color: white;
     border-color: #847cdc;
     padding-top: 3.5px;
-    padding-bottom: 5.5px
+    padding-bottom: 5.5px;
+    border-radius: 5px;
+    font-size: 18.5px;
 }
 
-.rowSeccion{
+.rowSeccion {
     margin-top: 15px !important;
 }
 
-#containerCrear{
+#containerCrear {
     border: black solid;
     border-width: 0.5px;
     padding-top: 25px;
     padding-bottom: 25px;
     padding-right: 15px;
     padding-left: 15px;
-    
+
 }
