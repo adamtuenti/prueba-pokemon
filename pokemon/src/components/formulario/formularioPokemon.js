@@ -1,30 +1,14 @@
 import React from "react";
 import { Container, Col, Row,FormControl } from "react-bootstrap";
 import { savePokemon, getPokemonById, updatePokemon } from "../../services/api";
-
-
 import Select from 'react-select'
-
-import TiposPokemon from './typePokemon.json'
-
+import TiposPokemon from '../../assets/typePokemon.json'
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
-
 import './formularioPokemon.scss'
-
-
-
 import { MdClose, MdSave } from "react-icons/md";
-
-
-
-
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-
-
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -49,7 +33,7 @@ export default class FormularioPokemon extends React.Component {
     componentDidMount() {
         this.setState({ accion: this.props.accionPokemon, idPokemon: this.props.idPokemon })
 
-        if(this.props.idPokemon != ''){
+        if(this.props.idPokemon !== ''){
             getPokemonById(this.props.idPokemon).then((response) => {
                 console.log(response)
                 this.setState({ nombre: response.name, ataque: response.attack, url: response.image, defensa: response.defense, tipo: response.type, hp: response.hp })
@@ -84,9 +68,6 @@ export default class FormularioPokemon extends React.Component {
         setTimeout(() => {
             
             savePokemon(jsonForm).then(_response => {
-                
-
-
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -94,8 +75,6 @@ export default class FormularioPokemon extends React.Component {
                     showConfirmButton: false,
                     timer: 1750
                 }).then(()=> {window.location.reload(false);})
-
-
             })
         }, 2500);
 
@@ -152,8 +131,8 @@ export default class FormularioPokemon extends React.Component {
         return (
             <Container id='containerCrear'>
                 <Row>
-                    {this.state.accion == 'new' && <p style = {{fontSize: '22.5px', marginBottom: '24.5px'}}>Nuevo Pokemon</p> }
-                    {this.state.accion == 'edit' && <p style = {{fontSize: '22.5px', marginBottom: '24.5px'}}>Editar Pokemon</p> }
+                    {this.state.accion ==='new' && <p style = {{fontSize: '22.5px', marginBottom: '24.5px'}}>Nuevo Pokemon</p> }
+                    {this.state.accion ==='edit' && <p style = {{fontSize: '22.5px', marginBottom: '24.5px'}}>Editar Pokemon</p> }
                 </Row>
 
                 <Row>
@@ -281,7 +260,7 @@ export default class FormularioPokemon extends React.Component {
 
                     <Col md='12'>
                         <button className="boton" onClick={() => { this.savePokemForm() }}>
-                            <MdSave size = '25' color='white' /> {this.state.idPokem == '' ? 'Guardar' : 'Actualizar'}
+                            <MdSave size = '25' color='white' /> {this.state.idPokemon ==='' ? 'Guardar' : 'Actualizar'}
 
 
 

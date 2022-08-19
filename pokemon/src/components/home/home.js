@@ -1,28 +1,15 @@
 import React from "react";
 import { Container, Col, Row, Table } from "react-bootstrap";
 import { getPokemons, detelePokemon } from "../../services/api";
-
-
-
 import FormularioPokemon from '../formulario/formularioPokemon'
-
+import {  TextField, IconButton } from '@material-ui/core';
 
 import { MdDeleteOutline, MdBorderColor, MdOutlineAdd } from 'react-icons/md'
-
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 import 'sweetalert2/src/sweetalert2.scss'
-
-
-
 import './home.scss'
-
-
-
-import { DatatableWrapper, Filter, Pagination, PaginationOptions,TableBody, TableHeader } from "react-bs-datatable";
-
-
+import { DatatableWrapper, Filter, Pagination, TableBody, TableHeader } from "react-bs-datatable";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 
 
 export default class Home extends React.Component {
@@ -32,6 +19,7 @@ export default class Home extends React.Component {
     this.state = {
       pokemones: [],
       crearPokemon: false,
+      labelFilter: '',
       accion: '',
       idPokemon: ''
 
@@ -42,13 +30,14 @@ export default class Home extends React.Component {
     getPokemons().then(respuesta => {
       this.setState({ pokemones: respuesta })
     })
-
-
-
-
   }
 
-  eliminarPokemon(pokemon){
+  openForm(mood, id){
+    this.setState({ idPokemon: id, accion: mood, crearPokemon: false })
+    setTimeout(() => (this.setState({crearPokemon: true})), 50)
+  }
+
+  eliminarPokemon(pokemon, index){
     Swal.fire({
       title: 'Cuidado!',
       text: "¿Deseas eliminar a " + pokemon.name + '?',
@@ -60,13 +49,22 @@ export default class Home extends React.Component {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.reload(false);
-        detelePokemon(pokemon.id)
-        Swal.fire(
-          'Eliminado!',
-          'Se eliminó a ' + pokemon.name + '.',
-          'success'
-        )
+
+        this.setState({
+      pokemones: this.state.pokemones.filter((obj, idx) => idx !== index)
+    });
+
+
+        
+        detelePokemon(pokemon.id).then( () => {
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Pokemon eliminado!',
+            showConfirmButton: false,
+            timer: 1750
+        })
+        })
       }
     })
   }
@@ -74,101 +72,106 @@ export default class Home extends React.Component {
 
   render() {
 
+    let pokemones =this.state.pokemones
 
-    const STORY_HEADERS = [
-      {
-        prop: "name",
-        title: "Nombre",
-        isFilterable: true
-      },
-      {
-        prop: "",
-        title: "Imagen",
-        cell: (row) => {
-          return (
-            <div>
+    if (this.state.labelFilter) {
+      pokemones = this.state.pokemones.filter(
+        (dt) => dt.name.toUpperCase().includes(this.state.labelFilter.toUpperCase())
+      );
+    }
 
-              <img className = 'img-fluid' style = {{width: '45px', heigth: '45px'}} src = {row.image}/>
-            </div>
-          );
-        }
-        
-      },
-      {
-        prop: "attack",
-        title: "Ataque",
-        isSortable: true
-      },
-      {
-        prop: "defense",
-        title: "Defensa",
-      },
-      {
-        prop: "",
-        title: "Acciones",
-        button: true,
-        cell: (row) => {
-          return (
-            <div>
 
-              <MdDeleteOutline size = '23.5' onClick={()=> this.eliminarPokemon(row)} color = '#847cdc'/>
-              <MdBorderColor size = '23.5' onClick={()=> {this.setState({ idPokemon: row.id, accion: 'edit', crearPokemon: true })}} color = '#847cdc' style = {{marginLeft: '7.5px'}}/>
-            </div>
-          );
-        }
-      
 
-      }
-    ];
-
+   
 
     return (
       <Container id='containerGeneral'>
 
         <p style = {{fontSize: '25px', marginBottom: '25px'}}>Listado de Pokemones</p>
 
-        
+        <Row style = {{marginBottom: '24.5px'}}>
 
-        
+          <Col xs={12} sm={6} lg={6}  className="justify-content-end align-items-end">
 
-        <DatatableWrapper
-          body={this.state.pokemones}
-          headers={STORY_HEADERS}
-          paginationOptionsProps={{
-            initialState: {
-              rowsPerPage: 5,
-              options: [5, 10, 15, 20]
-            }
-          }}
-        >
+          <TextField
+                fullWidth
+                id="standard-bare"
+                variant="outlined"
+                defaultValue="How can we help"
+                InputProps={{
+                  endAdornment: (
+                    
+                      <MdOutlineAdd />
+                   
+                  ),
+                }}
+              />
 
+            
+          <input
+                    type="text"
+                    value={this.state.labelFilter}
+                    style = {{paddingLeft: '7.5px'}}
+                    placeholder='Buscar'
+                    onChange={(e) =>
+                      this.setState({ labelFilter: e.target.value })
+                    }
+                  />
 
-          <Row className="mb-4 p-2">
-            <Col xs={12} lg={4} className="d-flex flex-col justify-content-end align-items-end">
-              <Filter placeholder="Ingrese nombre del pokemon.." />
+          </Col>
 
-            </Col>
-            <Col xs={12} sm={6} lg={4} className="d-flex flex-col justify-content-lg-center align-items-center justify-content-sm-start mb-2 mb-sm-0">
+          <Col xs={12} sm={6} lg={6} className="d-flex flex-col justify-content-end align-items-end">
               
-            </Col>
-            <Col xs={12} sm={6} lg={4} className="d-flex flex-col justify-content-end align-items-end">
-              
 
-              <button className="boton" onClick={() => { this.setState({ crearPokemon: true, accion: 'new' }) }}>
+              <button className="boton" onClick={() => { this.openForm('new', '') }}>
                 <MdOutlineAdd size = '25' color='white' /> Nuevo
 
 
 
 
               </button>
-            </Col>
-          </Row>
-          <Table>
-            <TableHeader />
-            <TableBody />
-          </Table>
-          <Pagination />
-        </DatatableWrapper>
+          </Col>
+
+        </Row>
+
+        
+
+                  
+
+        <Table striped bordered hover responsive>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Imagen</th>
+          <th>Ataque</th>
+          <th>Defensa</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {pokemones.map((elemento, index) => (
+          <tr>
+          <td>{elemento.name}</td>
+          <td><img className = 'img-fluid' alt = {elemento.id} style = {{width: '45px', heigth: '45px'}} src = {elemento.image}/></td>
+          <td>{elemento.attack}</td>
+          <td>{elemento.defense}</td>
+          <td>
+            <div>
+            <MdDeleteOutline size = '23.5' onClick={()=> this.eliminarPokemon(elemento, index)} color = '#847cdc'/>
+              <MdBorderColor size = '23.5' onClick={()=> {this.openForm('edit', elemento.id)}} color = '#847cdc' style = {{marginLeft: '7.5px'}}/>
+            </div>
+          </td>
+
+          </tr>
+        ))}
+       
+      </tbody>
+    </Table>
+
+        
+
+        
+
 
 
         {this.state.crearPokemon === true && <div style={{ marginTop: "62.5px", marginBottom: 'auto' }} align="center">
