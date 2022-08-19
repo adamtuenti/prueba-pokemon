@@ -17,12 +17,12 @@ export default class FormularioPokemon extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ataque: 0,
-            defensa: 0,
+            ataque: '',
+            defensa: '',
             nombre: '',
             url: '',
-            hp: 0,
-            tipo: 'type',
+            hp: '',
+            tipo: '',
             accion: '',
             idPokemon: ''
 
@@ -103,6 +103,8 @@ export default class FormularioPokemon extends React.Component {
 
 
     render() {
+
+        let camposLlenos = this.nombre === '' || this.state.ataque === '' || this.state.defensa === '' || this.state.hp === '' || this.state.tipo === '' || this.state.url === ''
 
 
         const stylesSelectType = {
@@ -220,11 +222,11 @@ export default class FormularioPokemon extends React.Component {
 
                         <Row>
                             <Col md='3'>
-                                Tipo
+                                Tipo:
                             </Col>
 
                             <Col md='9'>
-                                <Select styles = {stylesSelectType} placeholder={'Tipo de pokemon'} onInputChange={this.handleInputChange} required theme={({ borderRadius: '10px', marginTop: '7.5px', textAlign: 'left', fontSize: '5px' })} options={TiposPokemon} onChange={(selectedOption) => this.setState({ tipo: selectedOption.value })} className='select' />
+                                <Select styles = {stylesSelectType} placeholder={this.state.tipo === '' ? 'Tipo de pokemon' : this.state.tipo} onInputChange={this.handleInputChange} required theme={({ borderRadius: '10px', marginTop: '7.5px', textAlign: 'left', fontSize: '5px' })} options={TiposPokemon} onChange={(selectedOption) => this.setState({ tipo: selectedOption.value })} className='select' />
 
                             </Col>
                         </Row>
@@ -259,7 +261,7 @@ export default class FormularioPokemon extends React.Component {
                 <Row style={{ textAlign: 'center', marginTop: '35px' }}>
 
                     <Col md='12'>
-                        <button className="boton" onClick={() => { this.savePokemForm() }}>
+                        <button className="boton" style = {{opacity: camposLlenos === true ? '0.5' : '1'}} onClick={() => { this.savePokemForm() }} disabled = {camposLlenos}>
                             <MdSave size = '25' color='white' /> {this.state.idPokemon ==='' ? 'Guardar' : 'Actualizar'}
 
 
