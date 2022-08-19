@@ -42,6 +42,22 @@ export default class Home extends React.Component {
     setTimeout(() => (this.setState({crearPokemon: true})), 50)
   }
 
+  deleteFromApi(id){
+    detelePokemon(id).then( () => {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Pokemon eliminado!',
+        showConfirmButton: false,
+        timer: 1750
+    })
+  })
+  }
+
+  
+
+
+
   eliminarPokemon(pokemon, index){
     Swal.fire({
       title: 'Cuidado!',
@@ -54,23 +70,15 @@ export default class Home extends React.Component {
       cancelButtonText: 'No'
     }).then((result) => {
       if (result.isConfirmed) {
+        this.deleteFromApi(pokemon.id)
 
         this.setState({
           pokemones: this.state.pokemones.filter((obj, idx) => idx !== index)
         });
         
-        detelePokemon(pokemon.id).then( () => {
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Pokemon eliminado!',
-            showConfirmButton: false,
-            timer: 1750
-        })
-        })
+        
+        }})
       }
-    })
-  }
 
   renderPagination() {
     let items = [];
