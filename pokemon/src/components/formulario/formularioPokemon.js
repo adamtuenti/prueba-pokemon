@@ -1,8 +1,7 @@
 import React from "react";
-import { Container, Col, Row } from "react-bootstrap";
-import { savePokemon } from "../../services/api";
+import { Container, Col, Row,FormControl } from "react-bootstrap";
+import { savePokemon, getPokemonById, updatePokemon } from "../../services/api";
 
-import { FormControl, Form, InputGroup } from "react-bootstrap";
 
 import Select from 'react-select'
 
@@ -15,9 +14,8 @@ import './formularioPokemon.scss'
 
 
 
-import { GrAdd } from "react-icons/gr";
+import { MdClose, MdSave } from "react-icons/md";
 
-import ReactSlider from 'react-slider'
 
 
 
@@ -40,25 +38,35 @@ export default class FormularioPokemon extends React.Component {
             nombre: '',
             url: '',
             hp: 0,
-            tipo: 'type'
+            tipo: 'type',
+            accion: '',
+            idPokemon: ''
 
 
         }
     }
 
     componentDidMount() {
+        this.setState({ accion: this.props.accionPokemon, idPokemon: this.props.idPokemon })
+
+        if(this.props.idPokemon != ''){
+            getPokemonById(this.props.idPokemon).then((response) => {
+                console.log(response)
+                this.setState({ nombre: response.name, ataque: response.attack, url: response.image, defensa: response.defense, tipo: response.type, hp: response.hp })
+            })
+        }
 
 
 
     }
 
     savePokemForm() {
-
+        let jsonForm = { 'image': this.state.url, 'attack': this.state.ataque, 'defense': this.state.defensa, 'name': this.state.nombre, 'hp': this.state.hp, 'type': this.state.tipo, 'idAuthor': '1' }
+        if(this.state.idPokemon === ''){
+            
+        
+            
         Swal.fire({
-            //title: 'Atrapando pokemon...',
-            //width: 600,
-            //padding: '3.5em',
-            //color: '#716add',
             allowOutsideClick: false,
             showCancelButton: false,
             showConfirmButton: false,
@@ -74,8 +82,9 @@ export default class FormularioPokemon extends React.Component {
 
 
         setTimeout(() => {
-            let jsonForm = { 'image': this.state.url, 'attack': this.state.ataque, 'defense': this.state.defensa, 'name': this.state.nombre, 'hp': this.state.hp, 'type': this.state.tipo, 'idAuthor': '1' }
-            savePokemon(jsonForm).then(response => {
+            
+            savePokemon(jsonForm).then(_response => {
+                
 
 
                 Swal.fire({
@@ -84,11 +93,31 @@ export default class FormularioPokemon extends React.Component {
                     title: 'Pokemon atrapado',
                     showConfirmButton: false,
                     timer: 1750
-                })
+                }).then(()=> {window.location.reload(false);})
 
 
             })
         }, 2500);
+
+    }
+    else{
+        jsonForm.id = this.state.idPokemon
+
+        updatePokemon(jsonForm).then(() => {
+            
+
+
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Pokemon actualizado',
+                showConfirmButton: false,
+                timer: 1750
+            }).then(()=>{window.location.reload(false);})
+
+
+        })
+    }
 
 
     }
@@ -96,10 +125,26 @@ export default class FormularioPokemon extends React.Component {
 
     render() {
 
-        // Randomize data of the table columns.
-        // Note that the fields are all using the `prop` field of the headers.
 
-        //const TiposPokemon = []
+        const stylesSelectType = {
+            placeholder: defaultStyles => {
+                return {
+                    ...defaultStyles,
+                    color: "#303337",
+                    fontFamily: "Montserrat !important",
+                    fontSize: '15.5px',
+                    textAlign: 'left',
+                    borderRadiusLeft: '7.5px'
+                };
+            },
+            menu: base => ({
+                ...base,
+                //fontFamily: "Montserrat !important",
+                fontSize: '15.5px',
+                textAlign: 'left',
+                color: '#212529'
+            })
+        };
 
 
 
@@ -107,14 +152,15 @@ export default class FormularioPokemon extends React.Component {
         return (
             <Container id='containerCrear'>
                 <Row>
-                    <p>Nuevo Pokemon</p>
+                    {this.state.accion == 'new' && <p style = {{fontSize: '22.5px', marginBottom: '24.5px'}}>Nuevo Pokemon</p> }
+                    {this.state.accion == 'edit' && <p style = {{fontSize: '22.5px', marginBottom: '24.5px'}}>Editar Pokemon</p> }
                 </Row>
 
                 <Row>
                     <Col>
                         <Row>
                             <Col md='3'>
-                                Nombre
+                                Nombre:
                             </Col>
 
                             <Col md='9'>
@@ -133,12 +179,16 @@ export default class FormularioPokemon extends React.Component {
                         <Row>
 
                             <Col md='3'>
-                                Ataque
+                                Ataque:
                             </Col>
 
 
                             <Col md='9'>
-                                <Row> <Col md='1'>1 </Col><Col md='10'><Slider onChange={(a) => console.log(a)} /> </Col><Col md='1'>100</Col></Row>
+                                <Row> 
+                                    <Col md='1'>0 </Col>
+                                    <Col md='9'><Slider value = {this.state.ataque} onChange={(poder) => this.setState({ ataque: poder })} /> </Col>
+                                    <Col md='1'>100</Col>
+                                    </Row>
                             </Col>
 
                         </Row>
@@ -153,10 +203,10 @@ export default class FormularioPokemon extends React.Component {
                     <Col>
                         <Row>
                             <Col md='3'>
-                                Imagen
+                                Imagen:
                             </Col>
                             <Col md='9'>
-                                <FormControl onChange={(selectedOption) => this.setState({ url: selectedOption.target.value })} value={this.state.url} />
+                                <FormControl onChange={(selectedOption) => this.setState({ url: selectedOption.target.value })} value={this.state.url} placeholder='url'/>
                             </Col>
                         </Row>
 
@@ -165,11 +215,15 @@ export default class FormularioPokemon extends React.Component {
                     <Col>
                         <Row>
 
-                            <Col>
+                            <Col md = '3'>
                             Defensa
                             </Col>
-                            <Col>
-                            <ReactSlider  />
+                            <Col md = '9'>
+                            <Row style = {{padding: 'auto'}}> 
+                                <Col md='1'>0 </Col>
+                                <Col md='9'><Slider value = {this.state.defensa} onChange={(defensa) => this.setState({ defensa: defensa })} /> </Col>
+                                <Col md='1'>100</Col>
+                                </Row>
                             </Col>
                         
                         </Row>
@@ -191,7 +245,7 @@ export default class FormularioPokemon extends React.Component {
                             </Col>
 
                             <Col md='9'>
-                                <Select placeholder={'Seleccione tipo de pokemon'} onInputChange={this.handleInputChange} required theme={({ borderRadius: '10px', marginTop: '7.5px', textAlign: 'left', fontSize: '5px' })} options={TiposPokemon} onChange={(selectedOption) => this.setState({ tipo: selectedOption.value })} className='select' />
+                                <Select styles = {stylesSelectType} placeholder={'Tipo de pokemon'} onInputChange={this.handleInputChange} required theme={({ borderRadius: '10px', marginTop: '7.5px', textAlign: 'left', fontSize: '5px' })} options={TiposPokemon} onChange={(selectedOption) => this.setState({ tipo: selectedOption.value })} className='select' />
 
                             </Col>
                         </Row>
@@ -204,13 +258,18 @@ export default class FormularioPokemon extends React.Component {
 
                         <Row>
                             <Col md='3'>
-                                Tipo
+                                Vida:
                             </Col>
 
                             <Col md='9'>
-                                <Select placeholder={'Seleccione tipo de pokemon'} onInputChange={this.handleInputChange} required theme={({ borderRadius: '10px', marginTop: '7.5px', textAlign: 'left', fontSize: '5px' })} options={TiposPokemon} onChange={(selectedOption) => this.setState({ tipo: selectedOption.value })} className='select' />
-
-                            </Col>
+                                <Row>
+                                
+                   
+                      <Col md='1'>0 </Col>
+                                    <Col md='9'><Slider value = {this.state.hp} onChange={(hp) => this.setState({ hp: hp })} /> </Col>
+                                    <Col md='1'>100</Col>
+                                    </Row>
+                                    </Col>
                         </Row>
 
                     </Col>
@@ -222,7 +281,7 @@ export default class FormularioPokemon extends React.Component {
 
                     <Col md='12'>
                         <button className="boton" onClick={() => { this.savePokemForm() }}>
-                            <GrAdd color='white' /> Guardar
+                            <MdSave size = '25' color='white' /> {this.state.idPokem == '' ? 'Guardar' : 'Actualizar'}
 
 
 
@@ -230,7 +289,7 @@ export default class FormularioPokemon extends React.Component {
                         </button>
 
                         <button className="boton" style={{ marginLeft: '25px' }} onClick={() => { }}>
-                            <GrAdd color='white' /> Cancelar
+                            <MdClose size = '25' color='white' /> Cancelar
 
 
 

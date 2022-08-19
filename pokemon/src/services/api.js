@@ -53,7 +53,7 @@ export const detelePokemon = async (id) => {
     };
 
 
-    await fetch(process.env.REACT_APP_BASEPATH+':'+id.toString(), requestOptions)
+    await fetch(process.env.REACT_APP_BASEPATH+id.toString(), requestOptions)
         .then((response) => { return response.json() })
         .then((data) => {
             console.log('bien: ', data)
@@ -65,4 +65,54 @@ export const detelePokemon = async (id) => {
         })
 
     return json
+}
+
+export const getPokemonById = async(id) => {
+    console.log('id: ', id)
+    let json;
+    const requestOptions = {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+        //body: JSON.stringify(jsonForm)
+    };
+
+
+    await fetch(process.env.REACT_APP_BASEPATH+id, requestOptions)
+        .then((response) => { return response.json() })
+        .then((data) => {
+            console.log('bien: ', data)
+            json = data
+        })
+        .catch((err) => {
+            console.log('error: ', err)
+            return err
+        })
+
+    return json
+
+}
+
+export const updatePokemon = async(jsonForm) => {
+    console.log('id: ', jsonForm)
+    let json;
+    const requestOptions = {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(jsonForm)
+    };
+
+
+    await fetch(process.env.REACT_APP_BASEPATH+jsonForm.id, requestOptions)
+        .then((response) => { return response.json() })
+        .then((data) => {
+            console.log('bien: ', data)
+            return true
+        })
+        .catch((err) => {
+            console.log('error: ', err)
+            return false
+        })
+
+    return json
+
 }
