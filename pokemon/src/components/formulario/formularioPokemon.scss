@@ -1,3 +1,21 @@
+@media (max-width: 1000px) {
+    .colForm{
+        padding: 14.5px !important;
+    }
+
+
+}
+
+@media (min-width: 1000px) {
+    .rowSeccion {
+        margin-top: 15px !important;
+    }
+
+
+}
+
+
+
 .boton {
     background-color: #847cdc;
     padding-left: 2.5%;
@@ -10,9 +28,7 @@
     font-size: 18.5px;
 }
 
-.rowSeccion {
-    margin-top: 15px !important;
-}
+
 
 #containerCrear {
     border: black solid;

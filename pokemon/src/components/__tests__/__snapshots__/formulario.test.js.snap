@@ -1,0 +1,410 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Formulario Page Deberia renderizar el Formulario Pokemon 1`] = `
+<body>
+  <div>
+    <div
+      class="container"
+      id="containerCrear"
+    >
+      <div
+        class="row"
+      />
+      <div
+        class="row"
+      >
+        <div
+          class="col"
+        >
+          <div
+            class="row"
+          >
+            <div
+              class="col-md-3"
+            >
+              Nombre:
+            </div>
+            <div
+              class="col-md-9"
+            >
+              <input
+                class="form-control"
+                data-testid="nombre"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="col"
+        >
+          <div
+            class="row"
+          >
+            <div
+              class="col-md-3"
+            >
+              Ataque:
+            </div>
+            <div
+              class="col-md-9"
+            >
+              <div
+                class="row"
+              >
+                <div
+                  class="col-md-1"
+                >
+                  0 
+                </div>
+                <div
+                  class="col-md-9"
+                >
+                  <div
+                    class="rc-slider rc-slider-horizontal"
+                  >
+                    <div
+                      class="rc-slider-rail"
+                    />
+                    <div
+                      class="rc-slider-track"
+                      style="left: 0%; width: 0%;"
+                    />
+                    <div
+                      class="rc-slider-step"
+                    />
+                    <div
+                      aria-disabled="false"
+                      aria-valuemax="100"
+                      aria-valuemin="0"
+                      aria-valuenow="0"
+                      class="rc-slider-handle"
+                      role="slider"
+                      style="left: 0%; transform: translateX(-50%);"
+                      tabindex="0"
+                    />
+                  </div>
+                   
+                </div>
+                <div
+                  class="col-md-1"
+                >
+                  100
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="rowSeccion row"
+      >
+        <div
+          class="col"
+        >
+          <div
+            class="row"
+          >
+            <div
+              class="col-md-3"
+            >
+              Imagen:
+            </div>
+            <div
+              class="col-md-9"
+            >
+              <input
+                class="form-control"
+                placeholder="url"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="col"
+        >
+          <div
+            class="row"
+          >
+            <div
+              class="col-md-3"
+            >
+              Defensa
+            </div>
+            <div
+              class="col-md-9"
+            >
+              <div
+                class="row"
+              >
+                <div
+                  class="col-md-1"
+                >
+                  0 
+                </div>
+                <div
+                  class="col-md-9"
+                >
+                  <div
+                    class="rc-slider rc-slider-horizontal"
+                  >
+                    <div
+                      class="rc-slider-rail"
+                    />
+                    <div
+                      class="rc-slider-track"
+                      style="left: 0%; width: 0%;"
+                    />
+                    <div
+                      class="rc-slider-step"
+                    />
+                    <div
+                      aria-disabled="false"
+                      aria-valuemax="100"
+                      aria-valuemin="0"
+                      aria-valuenow="0"
+                      class="rc-slider-handle"
+                      role="slider"
+                      style="left: 0%; transform: translateX(-50%);"
+                      tabindex="0"
+                    />
+                  </div>
+                   
+                </div>
+                <div
+                  class="col-md-1"
+                >
+                  100
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="row"
+          />
+        </div>
+      </div>
+      <div
+        class="rowSeccion row"
+      >
+        <div
+          class="col"
+        >
+          <div
+            class="row"
+          >
+            <div
+              class="col-md-3"
+            >
+              Tipo:
+            </div>
+            <div
+              class="col-md-9"
+            >
+              <div
+                class="select css-b62m3t-container"
+              >
+                <span
+                  class="css-1f43avz-a11yText-A11yText"
+                  id="react-select-2-live-region"
+                />
+                <span
+                  aria-atomic="false"
+                  aria-live="polite"
+                  aria-relevant="additions text"
+                  class="css-1f43avz-a11yText-A11yText"
+                />
+                <div
+                  class=" css-veulyy-control"
+                >
+                  <div
+                    class=" css-319lph-ValueContainer"
+                  >
+                    <div
+                      class=" css-5zr052-placeholder"
+                      id="react-select-2-placeholder"
+                    >
+                      Tipo de pokemon
+                    </div>
+                    <div
+                      class=" css-6j8wv5-Input"
+                      data-value=""
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        aria-describedby="react-select-2-placeholder"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        class=""
+                        id="react-select-2-input"
+                        role="combobox"
+                        spellcheck="false"
+                        style="opacity: 1; width: 100%; grid-area: 1 / 2; min-width: 2px; border: 0px; margin: 0px; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                  <div
+                    class=" css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      class=" css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      class=" css-tlfecz-indicatorContainer"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        class="css-tj5bde-Svg"
+                        focusable="false"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        width="20"
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col"
+        >
+          <div
+            class="row"
+          >
+            <div
+              class="col-md-3"
+            >
+              Vida:
+            </div>
+            <div
+              class="col-md-9"
+            >
+              <div
+                class="row"
+              >
+                <div
+                  class="col-md-1"
+                >
+                  0 
+                </div>
+                <div
+                  class="col-md-9"
+                >
+                  <div
+                    class="rc-slider rc-slider-horizontal"
+                  >
+                    <div
+                      class="rc-slider-rail"
+                    />
+                    <div
+                      class="rc-slider-track"
+                      style="left: 0%; width: 0%;"
+                    />
+                    <div
+                      class="rc-slider-step"
+                    />
+                    <div
+                      aria-disabled="false"
+                      aria-valuemax="100"
+                      aria-valuemin="0"
+                      aria-valuenow="0"
+                      class="rc-slider-handle"
+                      role="slider"
+                      style="left: 0%; transform: translateX(-50%);"
+                      tabindex="0"
+                    />
+                  </div>
+                   
+                </div>
+                <div
+                  class="col-md-1"
+                >
+                  100
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="row"
+        style="text-align: center; margin-top: 35px;"
+      >
+        <div
+          class="col-md-12"
+        >
+          <button
+            class="boton"
+            disabled=""
+            style="opacity: 0.5;"
+          >
+            <svg
+              color="white"
+              fill="currentColor"
+              height="25"
+              stroke="currentColor"
+              stroke-width="0"
+              style="color: white;"
+              viewBox="0 0 24 24"
+              width="25"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M17 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
+              />
+            </svg>
+             
+            Guardar
+          </button>
+          <button
+            class="boton"
+            style="margin-left: 25px;"
+          >
+            <svg
+              color="white"
+              fill="currentColor"
+              height="25"
+              stroke="currentColor"
+              stroke-width="0"
+              style="color: white;"
+              viewBox="0 0 24 24"
+              width="25"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 0h24v24H0z"
+                fill="none"
+              />
+              <path
+                d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+              />
+            </svg>
+             Cancelar
+          </button>
+        </div>
+        <div
+          class="col"
+        />
+      </div>
+    </div>
+  </div>
+</body>
+`;

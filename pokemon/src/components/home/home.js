@@ -120,19 +120,21 @@ export default class Home extends React.Component {
       pokemones = this.state.pokemones.filter(
         (dt) => dt.name.toUpperCase().includes(this.state.labelFilter.toUpperCase())
       );
+      range = this.calculateRange(pokemones, this.state.rows)
+      slice = this.sliceData(pokemones, page, this.state.rows)
     }
 
 
     return (
       <Container id='containerGeneral'>
 
-        <p style={{ fontSize: '25px', marginBottom: '25px' }}>Listado de Pokemones</p>
+        <p id = 'titleHome' style={{ fontSize: '25px', marginBottom: '25px' }}>Listado de Pokemones</p>
 
         <Row style={{ marginBottom: '24.5px' }}>
 
-          <Col xs={12} sm={6} lg={6} className="justify-content-end align-items-end">
+          <Col xs={7} sm={6} lg={6} className="justify-content-end align-items-end">
 
-            <div style={{ border: 'solid 0.5px', width: '62.5%', padding: '3.5px' }}>
+            <div id = 'divSearch' style={{ border: 'solid 0.5px', width: '67.5%', padding: '3.5px' }}>
               <MdSearch style={{ marginLeft: '7.5px' }} />
 
               <input
@@ -148,8 +150,8 @@ export default class Home extends React.Component {
 
           </Col>
 
-          <Col xs={12} sm={6} lg={6} className="d-flex flex-col justify-content-end align-items-end">
-            <button className="boton" onClick={() => { this.openForm('new', '') }}>
+          <Col xs={5} sm={6} lg={6} className="d-flex flex-col justify-content-end align-items-end">
+            <button className="boton" data-testid="nuevo-pokemon" onClick={() => { this.openForm('new', '') }}>
               <MdOutlineAdd size='25' color='white' /> Nuevo
             </button>
           </Col>
@@ -158,11 +160,11 @@ export default class Home extends React.Component {
         <Table striped bordered hover responsive>
           <thead>
             <tr>
-              <th>Nombre</th>
-              <th>Imagen</th>
-              <th>Ataque</th>
-              <th>Defensa</th>
-              <th>Acciones</th>
+              <th className = 'headerTable'>Nombre</th>
+              <th className = 'headerTable'>Imagen</th>
+              <th className = 'headerTable'>Ataque</th>
+              <th className = 'headerTable'>Defensa</th>
+              <th className = 'headerTable'>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -174,8 +176,8 @@ export default class Home extends React.Component {
                 <td>{elemento.defense}</td>
                 <td>
                   <div>
-                    <MdDeleteOutline size='23.5' onClick={() => this.eliminarPokemon(elemento, index)} color='#847cdc' />
-                    <MdBorderColor size='23.5' onClick={() => { this.openForm('edit', elemento.id) }} color='#847cdc' style={{ marginLeft: '7.5px' }} />
+                    <MdDeleteOutline size='23.5'  data-testid="eliminar-pokemon"  onClick={() => this.eliminarPokemon(elemento, index)} color='#847cdc' />
+                    <MdBorderColor size='23.5' data-testid="editar-pokemon" onClick={() => { this.openForm('edit', elemento.id) }} color='#847cdc' style={{ marginLeft: '7.5px' }} />
                   </div>
                 </td>
 

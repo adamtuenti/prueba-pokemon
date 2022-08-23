@@ -113,54 +113,54 @@ export default class FormularioPokemon extends React.Component {
                     {this.state.accion === 'edit' && <p style={{ fontSize: '22.5px', marginBottom: '24.5px' }}>Editar Pokemon</p>}
                 </Row>
                 <Row>
-                    <Col>
+                    <Col lg = '6' md = '6' xs = '12' className = 'colForm'>
                         <Row>
-                            <Col md='3'>
+                            <Col md='3' xs = '3'>
                                 Nombre:
                             </Col>
 
-                            <Col md='9'>
-                                <FormControl onChange={(selectedOption) => this.setState({ nombre: selectedOption.target.value })} value={this.state.nombre} />
+                            <Col md='9' xs = '9'>
+                                <FormControl data-testid='nombre' onChange={(selectedOption) => this.setState({ nombre: selectedOption.target.value })} value={this.state.nombre} />
                             </Col>
                         </Row>
                     </Col>
 
-                    <Col>
+                    <Col lg = '6' md = '6' xs = '12' className = 'colForm'>
                         <Row>
-                            <Col md='3'>
+                            <Col md='3' xs = '3'>
                                 Ataque:
                             </Col>
-                            <Col md='9'>
+                            <Col md='9' xs = '9'>
                                 <Row>
-                                    <Col md='1'>0 </Col>
-                                    <Col md='9'><Slider value={this.state.ataque} onChange={(poder) => this.setState({ ataque: poder })} /> </Col>
-                                    <Col md='1'>100</Col>
+                                    <Col md='1' xs = '1'>0 </Col>
+                                    <Col md='9' xs = '9'><Slider value={this.state.ataque} onChange={(poder) => this.setState({ ataque: poder })} /> </Col>
+                                    <Col md='1' xs = '1'>100</Col>
                                 </Row>
                             </Col>
                         </Row>
                     </Col>
                 </Row>
                 <Row className='rowSeccion'>
-                    <Col>
+                    <Col lg = '6' md = '6' xs = '12' className = 'colForm'>
                         <Row>
-                            <Col md='3'>
+                            <Col md='3' xs = '3'>
                                 Imagen:
                             </Col>
-                            <Col md='9'>
+                            <Col md='9' xs = '9'>
                                 <FormControl onChange={(selectedOption) => this.setState({ url: selectedOption.target.value })} value={this.state.url} placeholder='url' />
                             </Col>
                         </Row>
                     </Col>
-                    <Col>
+                    <Col lg = '6' md = '6' xs = '12' className = 'colForm'>
                         <Row>
-                            <Col md='3'>
-                                Defensa
+                            <Col md='3' xs = '3'>
+                                Defensa:
                             </Col>
-                            <Col md='9'>
+                            <Col md='9' xs = '9'>
                                 <Row style={{ padding: 'auto' }}>
-                                    <Col md='1'>0 </Col>
-                                    <Col md='9'><Slider value={this.state.defensa} onChange={(defensa) => this.setState({ defensa: defensa })} /> </Col>
-                                    <Col md='1'>100</Col>
+                                    <Col md='1' xs = '1'>0 </Col>
+                                    <Col md='9' xs = '9'><Slider value={this.state.defensa} onChange={(defensa) => this.setState({ defensa: defensa })} /> </Col>
+                                    <Col md='1' xs = '1'>100</Col>
                                 </Row>
                             </Col>
                         </Row>
@@ -169,26 +169,26 @@ export default class FormularioPokemon extends React.Component {
                     </Col>
                 </Row>
                 <Row className='rowSeccion'>
-                    <Col>
+                    <Col lg = '6' md = '6' xs = '12' className = 'colForm'>
                         <Row>
-                            <Col md='3'>
+                            <Col md='3' xs = '3'>
                                 Tipo:
                             </Col>
-                            <Col md='9'>
+                            <Col md='9' xs = '9'>
                                 <Select styles={stylesSelectType} placeholder={this.state.tipo === '' ? 'Tipo de pokemon' : this.state.tipo} onInputChange={this.handleInputChange} required theme={({ borderRadius: '10px', marginTop: '7.5px', textAlign: 'left', fontSize: '5px' })} options={TiposPokemon} onChange={(selectedOption) => this.setState({ tipo: selectedOption.value })} className='select' />
                             </Col>
                         </Row>
                     </Col>
-                    <Col>
+                    <Col lg = '6' md = '6' xs = '12' className = 'colForm'>
                         <Row>
-                            <Col md='3'>
+                            <Col md='3' xs = '3'>
                                 Vida:
                             </Col>
-                            <Col md='9'>
+                            <Col md='9' xs = '9'>
                                 <Row>
-                                    <Col md='1'>0 </Col>
-                                    <Col md='9'><Slider value={this.state.hp} onChange={(hp) => this.setState({ hp: hp })} /> </Col>
-                                    <Col md='1'>100</Col>
+                                    <Col md='1' xs = '1'>0 </Col>
+                                    <Col md='9' xs = '9'><Slider value={this.state.hp} onChange={(hp) => this.setState({ hp: hp })} /> </Col>
+                                    <Col md='1' xs = '1'>100</Col>
                                 </Row>
                             </Col>
                         </Row>
