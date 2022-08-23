@@ -83,7 +83,7 @@ export default class FormularioPokemon extends React.Component {
 
     render() {
 
-        let camposLlenos = this.nombre === '' || this.state.ataque === '' || this.state.defensa === '' || this.state.hp === '' || this.state.tipo === '' || this.state.url === ''
+        let camposLlenos = this.state.nombre === '' || this.state.ataque === '' || this.state.defensa === '' || this.state.hp === '' || this.state.tipo === '' || this.state.url === ''
         const stylesSelectType = {
             placeholder: defaultStyles => {
                 return {
