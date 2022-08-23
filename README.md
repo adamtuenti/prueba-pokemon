@@ -1,20 +1,42 @@
 # Prueba de Adan Navarrete
 
-Framework:
- -React JS
+# Framework:
+ - React JS
 
-## Instalar dependencias
+# Clonar el repositorio
 
 
-### `npm install`
+```sh
+git clone https://github.com/adamtuenti/prueba-pokemon
+```
 
-## Crear archivo.env en la raiz del proyecto
+# Instalar las depencias
+
+```sh
+cd pokemon
+npm install --force
+```
+
+# Crear archivo _.env_ en la raiz del proyecto
 
 ```sh
 REACT_APP_BASEPATH=https://bp-pokemons.herokuapp.com/
 ```
 
-## Ejecutar programa
 
 
-### `npm start`
+# Ejecutar la aplicación
+
+```sh
+npm start
+```
+
+# Ejecutar las pruebas
+
+```sh
+npm run test
+```
+
+
+
+
